@@ -32,9 +32,19 @@ public class ServerLoadBalancerTest {
 		assertThat("the server should contain vm", theServer.contains(theVm));
 	}
 
+	private Vm a(VmBuilder builder) {
+		// TODO Auto-generated method stub
+		return builder.build();
+	}
+	private Vm[] aListOfVmsWith(Vm theVm) {
+		return new Vm[]{theVm};
+	}
+	
+	private VmBuilder vm() {
+		return new VmBuilder();
+	}
 	private void balance(Server[] servers, Vm[] vms) {
 		new ServerLoadBalancer().balance(servers, vms);
-
 	}
 
 	private Matcher<? super Server> hasLoadPercentageOf(double d) {
@@ -44,7 +54,7 @@ public class ServerLoadBalancerTest {
 
 	private Server[] aListOfServersWith(Server theServer) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Server[]{theServer};
 	}
 
 	private Vm[] anEmptyListOfVms() {
