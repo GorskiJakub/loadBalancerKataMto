@@ -1,5 +1,6 @@
 package edu.iis.mto.serverloadbalancer;
 
+import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.hasAVmCountOf;
 import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.hasCurrentLoadPercentageOf;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
 import static edu.iis.mto.serverloadbalancer.VmBuilder.vm;
@@ -61,10 +62,7 @@ public class ServerLoadBalancerTest {
 				theServer.contains(theSecondVm));
 	}
 
-	private Matcher<? super Server> hasAVmCountOf(int expectedCount) {
-		// TODO Auto-generated method stub
-		return new ServerVmCountMatcher(expectedCount);
-	}
+
 
 	private Vm[] aListOfVmsWith(Vm... theVm) {
 		// TODO Auto-generated method stub
