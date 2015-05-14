@@ -20,12 +20,12 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
 	protected void describeMismatchSafely(Server item, Description description) {
 		description.appendText("a server with load percentage of ")
-				.appendValue(item.currnetLoadPercentage);
+				.appendValue(item.currentLoadPercentage);
 	}
 
 	@Override
 	protected boolean matchesSafely(Server item) {
-		return equalsDouble(expectedLoadPercentage, item.currnetLoadPercentage);
+		return equalsDouble(expectedLoadPercentage, item.currentLoadPercentage);
 	}
 
 	private boolean equalsDouble(double d1, double d2) {
@@ -39,6 +39,9 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
 	public static Matcher<? super Server> hasAVmCountOf(int expectedCount) {
 		return new ServerVmCountMatcher(expectedCount);
+	}
+	public static Matcher<? super Server> hasLoadPercentageOf(double expectedLoadPercentage) {
+		return new CurrentLoadPercentageMatcher(expectedLoadPercentage);
 	}
 
 }

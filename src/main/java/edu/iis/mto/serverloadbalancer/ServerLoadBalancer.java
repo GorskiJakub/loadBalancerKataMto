@@ -25,7 +25,7 @@ public class ServerLoadBalancer {
 		Server lessLoaded = null;
 		for (Server server : vmCapableServers) {
 			if (lessLoaded == null
-					|| lessLoaded.currnetLoadPercentage > server.currnetLoadPercentage) {
+					|| lessLoaded.currentLoadPercentage > server.currentLoadPercentage) {
 				lessLoaded = server;
 			}
 
