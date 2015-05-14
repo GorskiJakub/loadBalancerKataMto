@@ -61,6 +61,16 @@ public class ServerLoadBalancerTest {
 				theServer.contains(theSecondVm));
 	}
 
+	private Matcher<? super Server> hasAVmCountOf(int expectedCount) {
+		// TODO Auto-generated method stub
+		return new ServerVmCountMatcher(expectedCount);
+	}
+
+	private Vm[] aListOfVmsWith(Vm... theVm) {
+		// TODO Auto-generated method stub
+		return theVm;
+	}
+
 	private Vm[] aListOfVmsWith(Vm theVm) {
 		return new Vm[] { theVm };
 	}
