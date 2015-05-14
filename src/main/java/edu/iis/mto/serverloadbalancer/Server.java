@@ -3,8 +3,6 @@ package edu.iis.mto.serverloadbalancer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.Matcher;
-
 public class Server {
 
 	private static final double MAXIMUM_LOAD = 100.0d;
@@ -27,8 +25,7 @@ public class Server {
 
 	public void addVm(Vm vm) {
 		this.vms.add(vm);
-		this.currnetLoadPercentage += (double) vm.getSize()
-				/ (double) this.getCapacity() * MAXIMUM_LOAD;
+		this.currnetLoadPercentage += loadOfVm(vm);
 
 	}
 
@@ -37,8 +34,12 @@ public class Server {
 	}
 
 	public boolean canFit(Vm vm) {
-		return this.currnetLoadPercentage + ((double) vm.getSize()
-				/ (double) this.getCapacity() * MAXIMUM_LOAD)<= MAXIMUM_LOAD;
+		return this.currnetLoadPercentage + loadOfVm(vm)<= MAXIMUM_LOAD;
+	}
+
+	private double loadOfVm(Vm vm) {
+		return (double) vm.getSize()
+				/ (double) this.getCapacity() * MAXIMUM_LOAD;
 	}
 
 }
