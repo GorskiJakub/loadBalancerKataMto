@@ -22,6 +22,7 @@ public class ServerLoadBalancerTest {
 
 		assertThat(theServer, hasCurrentLoadPercentageOf(0.0d));
 	}
+
 	@Test
 	public void balancingOneServerWithOneSlotCapacity_andOneSlotVm_fillsTheServerWithTheVm() {
 		Server theServer = a(server().withCapacity(1));
@@ -32,7 +33,7 @@ public class ServerLoadBalancerTest {
 		assertThat(theServer, hasCurrentLoadPercentageOf(100.0d));
 		assertThat("the server should contain vm", theServer.contains(theVm));
 	}
-	
+
 	@Test
 	public void balancingOneServerWithTenSlotCapacity_andOneSlotVm_fillsTheServerWithTenPercent() {
 		Server theServer = a(server().withCapacity(10));
@@ -44,10 +45,25 @@ public class ServerLoadBalancerTest {
 		assertThat("the server should contain vm", theServer.contains(theVm));
 	}
 
-	private Vm[] aListOfVmsWith(Vm theVm) {
-		return new Vm[]{theVm};
+	@Test
+	public void balancingAServerWithEnoughRoom_getsFilledWithAllVms() {
+		Server theServer = a(server().withCapacity(100));
+		Vm theFirstVm = a(vm().ofSize(1));
+		Vm theSecondVm = a(vm().ofSize(1));
+
+		balance(aListOfServersWith(theServer),
+				aListOfVmsWith(theFirstVm, theSecondVm));
+
+		assertThat(theServer, hasAVmCountOf(2));
+		assertThat("the server should contain vm",
+				theServer.contains(theFirstVm));
+		assertThat("the server should contain vm",
+				theServer.contains(theSecondVm));
 	}
-	
+
+	private Vm[] aListOfVmsWith(Vm theVm) {
+		return new Vm[] { theVm };
+	}
 
 	private void balance(Server[] servers, Vm[] vms) {
 		new ServerLoadBalancer().balance(servers, vms);
@@ -60,7 +76,7 @@ public class ServerLoadBalancerTest {
 
 	private Server[] aListOfServersWith(Server theServer) {
 		// TODO Auto-generated method stub
-		return new Server[]{theServer};
+		return new Server[] { theServer };
 	}
 
 	private Vm[] anEmptyListOfVms() {
