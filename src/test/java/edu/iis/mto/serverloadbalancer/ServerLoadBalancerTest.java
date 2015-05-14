@@ -62,10 +62,20 @@ public class ServerLoadBalancerTest {
 				theServer.contains(theSecondVm));
 	}
 
+	@Test
+	public void aVm_ShouldBeBalanced_onLessLoadedServerFirst() {
+		Server lessLoadedServer = a(server().withCapacity(100)
+				.withCurrentLoadOf(45.0d));
+		Server moreLoadedServer = a(server().withCapacity(100)
+				.withCurrentLoadOf(50.0d));
+		balance(aListOfServersWith(moreLoadedServer, lessLoadedServer),
+				aListOfVmsWith(theVm));
 
+		assertThat("the less loaded server should contain vm",
+				lessLoadedServer.contains(theVm));
+	}
 
 	private Vm[] aListOfVmsWith(Vm... theVm) {
-		// TODO Auto-generated method stub
 		return theVm;
 	}
 
@@ -78,17 +88,17 @@ public class ServerLoadBalancerTest {
 	}
 
 	private Matcher<? super Server> hasLoadPercentageOf(double d) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	private Server[] aListOfServersWith(Server theServer) {
-		// TODO Auto-generated method stub
+
 		return new Server[] { theServer };
 	}
 
 	private Vm[] anEmptyListOfVms() {
-		// TODO Auto-generated method stub
+
 		return new Vm[0];
 	}
 

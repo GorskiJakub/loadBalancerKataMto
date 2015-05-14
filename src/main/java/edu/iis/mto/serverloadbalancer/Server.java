@@ -12,7 +12,7 @@ public class Server {
 	private int capacity;
 
 	private List<Vm> vms = new ArrayList<Vm>();
-	
+
 	public Server(int capacity) {
 		this.capacity = capacity;
 	}
