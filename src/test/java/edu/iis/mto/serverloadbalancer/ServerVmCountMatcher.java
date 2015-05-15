@@ -5,11 +5,11 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 
-public class SeverVmCountMatcher extends TypeSafeMatcher<Server> {
+public class ServerVmCountMatcher extends TypeSafeMatcher<Server> {
 
 	private int expectedCount;
 
-	public SeverVmCountMatcher(int expectedCount) {
+	public ServerVmCountMatcher(int expectedCount) {
 		this.expectedCount = expectedCount;
 	}
 
@@ -26,6 +26,9 @@ public class SeverVmCountMatcher extends TypeSafeMatcher<Server> {
 	public boolean matchesSafely(Server item) {
 
 		return item.vmsCount() == expectedCount;
+	}
+	public static Matcher<? super Server> hasAVmCountOf(int expectedCount) {
+		return new ServerVmCountMatcher(expectedCount);
 	}
 
 }
