@@ -9,4 +9,8 @@ public class Vm {
 		
 	}
 
+	public int getSize() {
+		return size;
+	}
+
 }

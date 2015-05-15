@@ -16,4 +16,9 @@ public class Server {
 		return true;
 	}
 
+	public int getCapacity() {
+		// TODO Auto-generated method stub
+		return capacity;
+	}
+
 }
