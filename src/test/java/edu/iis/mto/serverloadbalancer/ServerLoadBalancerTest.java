@@ -1,12 +1,9 @@
 package edu.iis.mto.serverloadbalancer;
 
-import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentagematcher.hasLoadPercentageOf;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
 import static edu.iis.mto.serverloadbalancer.ServerVmCountMatcher.hasAVmCountOf;
 import static edu.iis.mto.serverloadbalancer.VmBuilder.vm;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
@@ -73,11 +70,16 @@ public class ServerLoadBalancerTest {
 				.withCurrentLoadOf(45.0d));
 		Server moreLoadedServer = a(server().withCapacity(100)
 				.withCurrentLoadOf(50.0d));
+		Vm theVm = a(vm().ofSize(10));
 		balance(aListOfServersWith(moreLoadedServer, lessLoadedServer),
 				aListOfVmsWith(theVm));
 
 		assertThat("the less loaded server should contain vm",
 				lessLoadedServer.contains(theVm));
+	}
+
+	private Server[] aListOfServersWith(Server... theServers) {
+		return theServers;
 	}
 
 	private Vm[] aListOfVmsWith(Vm... theVm) {
@@ -89,12 +91,10 @@ public class ServerLoadBalancerTest {
 	}
 
 	private Server[] aListOfServersWith(Server theServer) {
-		// TODO Auto-generated method stub
 		return new Server[] { theServer };
 	}
 
 	private Vm[] anEmptyListOfVms() {
-		// TODO Auto-generated method stub
 		return new Vm[0];
 	}
 
