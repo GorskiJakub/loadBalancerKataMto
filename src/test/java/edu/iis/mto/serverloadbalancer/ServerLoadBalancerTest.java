@@ -1,5 +1,6 @@
 package edu.iis.mto.serverloadbalancer;
 
+import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -40,8 +41,6 @@ public class ServerLoadBalancerTest {
 		return new Vm[0];
 	}
 
-	private ServerBuilder server() {
-		return new ServerBuilder();
-	}
+	
 
 }
