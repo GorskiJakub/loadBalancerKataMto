@@ -105,6 +105,11 @@ public class ServerLoadBalancerTest {
 			assertThat(server2, hasLoadPercentageOf(66.66d));
 		}
 
+	private Matcher<? super Server> hasLoadPercentageOf(double expectedLoadPercentage) {
+			// TODO Auto-generated method stub
+			return new CurrentLoadPercentagematcher(expectedLoadPercentage);
+		}
+
 	private Server[] aListOfServersWith(Server... theServers) {
 		return theServers;
 	}
