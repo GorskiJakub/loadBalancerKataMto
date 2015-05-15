@@ -1,11 +1,15 @@
 package edu.iis.mto.serverloadbalancer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hamcrest.Matcher;
 
 public class Server {
 
 	private static final double MAXIMUM_LOAD = 100.0d;
 	private int capacity;
+	private List<Vm> vms = new ArrayList<Vm>();
 	public double currnetLoadPercentage;
 
 	public Server(int capacity) {
@@ -14,18 +18,22 @@ public class Server {
 	}
 
 	public boolean contains(Vm theVm) {
-		return true;
+		return vms.contains(theVm);
 	}
 
 	public int getCapacity() {
-		// TODO Auto-generated method stub
 		return capacity;
 	}
 
 	public void addVm(Vm vm) {
+		vms.add(vm);
 		this.currnetLoadPercentage += (double)vm.getSize()
 				/ (double)this.getCapacity() *MAXIMUM_LOAD;
 		
+	}
+
+	public int vmsCount() {
+		return vms.size();
 	}
 
 }
