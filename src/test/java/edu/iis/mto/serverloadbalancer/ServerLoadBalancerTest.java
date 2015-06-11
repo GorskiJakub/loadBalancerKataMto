@@ -56,6 +56,14 @@ public class ServerLoadBalancerTest {
 		assertThat("server should contains", theServer.contains(theSecondVm));
 	}
 
+	private Matcher<? super Server> hasAVmCountOf(int expectedCount) {
+		return new ServerVmCountMatcher(expectedCount);
+	}
+
+	private Vm[] aListOfVmsWith(Vm... theVm) {
+		return theVm;
+	}
+
 	private <T> T a(Builder<T> builder) {
 		return builder.build();
 	}
