@@ -15,4 +15,9 @@ public class Server {
 		return true;
 	}
 
+	public double getCapacity() {
+		return capacity;
+	}
+
 }
+
