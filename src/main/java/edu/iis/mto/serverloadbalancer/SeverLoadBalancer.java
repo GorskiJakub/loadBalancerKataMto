@@ -3,9 +3,16 @@ package edu.iis.mto.serverloadbalancer;
 public class SeverLoadBalancer {
 
 	public void balance(Server[] servers, Vm[] vms) {
-		for(Vm vm: vms)
-		{
-			servers[0].addVm(vm);
+		for (Vm vm : vms) {
+			Server lessLoaded = null;
+			for (Server server : servers) {
+				if (lessLoaded == null
+						|| lessLoaded.currentLoadPercentage > server.currentLoadPercentage) {
+					lessLoaded = server;
+				}
+			}
+
+			lessLoaded.addVm(vm);
 		}
 
 	}

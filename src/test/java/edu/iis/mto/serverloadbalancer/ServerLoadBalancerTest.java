@@ -78,6 +78,10 @@ public class ServerLoadBalancerTest {
 
 
 
+	private Server[] aListOfServersWith(Server... theServer) {
+		return theServer;
+	}
+
 	private Vm[] aListOfVmsWith(Vm... theVm) {
 		return theVm;
 	}
