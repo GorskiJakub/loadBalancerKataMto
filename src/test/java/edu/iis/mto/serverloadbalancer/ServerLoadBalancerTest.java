@@ -2,6 +2,7 @@ package edu.iis.mto.serverloadbalancer;
 
 import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.hasLoadPercentageOf;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
+import static edu.iis.mto.serverloadbalancer.VmBuilder.vm;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -24,26 +25,20 @@ public class ServerLoadBalancerTest {
 	}
 
 	@Test
-			public void balancingOneServerWithOneSlotCapacity_andOneSlotVm_fillsTheServerWiththeVm(){
-				Server theServer = a(server().withCapacity(1));
-				Vm theVm = a(vm().ofSize(1));
-				balance(aListOfServersWith(theServer), aListOfVmsWith(theVm));
-		
-				assertThat(theServer, hasLoadPercentageOf(100.0d));
-				assertThat("server should contains", theServer.contains(theVm));
-			}
+	public void balancingOneServerWithOneSlotCapacity_andOneSlotVm_fillsTheServerWiththeVm() {
+		Server theServer = a(server().withCapacity(1));
+		Vm theVm = a(vm().ofSize(1));
+		balance(aListOfServersWith(theServer), aListOfVmsWith(theVm));
+
+		assertThat(theServer, hasLoadPercentageOf(100.0d));
+		assertThat("server should contains", theServer.contains(theVm));
+	}
 
 	private Vm[] aListOfVmsWith(Vm theVm) {
-		return new Vm[]{theVm};
+		return new Vm[] { theVm };
 	}
 
-	private Vm a(VmBuilder builder) {
-		return builder.build();
-	}
 
-	private VmBuilder vm() {
-		return new VmBuilder();
-	}
 
 	private void balance(Server[] servers, Vm[] vms) {
 		new SeverLoadBalancer().balance(servers, vms);
@@ -58,7 +53,7 @@ public class ServerLoadBalancerTest {
 		return new Server[] { theServer };
 	}
 
-	private Server a(ServerBuilder builder) {
+	private <T> T a(Builder<T> builder) {
 		return builder.build();
 	}
 
