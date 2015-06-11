@@ -4,6 +4,7 @@ import org.hamcrest.Matcher;
 
 public class Server {
 
+	private static final double MAX_LOAD = 100.0d;
 	private int capacity;
 	public double currentLoadPercentage;
 
@@ -19,5 +20,10 @@ public class Server {
 		return capacity;
 	}
 
-}
+	public void addVm(Vm vm) {
+		this.currentLoadPercentage += (double) vm.getSize()
+				/ (double) this.getCapacity() * MAX_LOAD;
 
+	}
+
+}
