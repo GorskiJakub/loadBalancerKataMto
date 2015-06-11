@@ -71,6 +71,10 @@ public class ServerLoadBalancerTest {
 				lessLoadedServer.contains(theVm));
 	}
 
+	private Server[] aListOfServersWith(Server... theServer) {
+		return theServer;
+	}
+
 	private Vm[] aListOfVmsWith(Vm... theVm) {
 		return theVm;
 	}
