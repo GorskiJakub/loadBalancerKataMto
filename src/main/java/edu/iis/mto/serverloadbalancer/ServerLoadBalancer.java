@@ -9,13 +9,13 @@ public class ServerLoadBalancer {
 
 		for (Vm vm : vms) {
 			List<Server> vmCapableServers = new ArrayList<Server>();
-			for(Server server : servers){
-				if(server.canFit(vm)){
+			for (Server server : servers) {
+				if (server.canFit(vm)) {
 					vmCapableServers.add(server);
 				}
 			}
 			Server lessLoaded = findLessLoadedServer(vmCapableServers);
-			if(lessLoaded != null){
+			if (lessLoaded != null) {
 				lessLoaded.addVm(vm);
 			}
 		}

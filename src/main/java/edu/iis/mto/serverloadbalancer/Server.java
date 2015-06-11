@@ -10,7 +10,7 @@ public class Server {
 	private static final double MAX_LOAD = 100.0d;
 	private int capacity;
 	public double currentLoadPercentage;
-	
+
 	private List<Vm> vms = new ArrayList<Vm>();
 
 	public Server(int capacity) {
@@ -27,8 +27,7 @@ public class Server {
 
 	public void addVm(Vm vm) {
 		vms.add(vm);
-		this.currentLoadPercentage += (double)vm.getSize()
-				/ (double)this.getCapacity() * MAX_LOAD;
+		this.currentLoadPercentage += loadOfVm(vm);
 	}
 
 	public int vmsCount() {
@@ -36,8 +35,11 @@ public class Server {
 	}
 
 	public boolean canFit(Vm vm) {
-		return this.currentLoadPercentage + ((double)vm.getSize()
-				/ (double)this.getCapacity() * MAX_LOAD) <= MAX_LOAD;
+		return this.currentLoadPercentage + loadOfVm(vm) <= MAX_LOAD;
+	}
+
+	private double loadOfVm(Vm vm) {
+		return (double) vm.getSize() / (double) this.getCapacity() * MAX_LOAD;
 	}
 
 }
