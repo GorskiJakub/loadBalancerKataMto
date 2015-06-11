@@ -1,8 +1,11 @@
 package edu.iis.mto.serverloadbalancer;
 
+import static edu.iis.mto.serverloadbalancer.VmBuilder.vm;
+
 public class ServerBuilder implements Builder<Server> {
 
 	private int capacity;
+	private double expectedLoad;
 
 	public ServerBuilder withCapacity(int capacity) {
 		this.capacity = capacity;
@@ -10,11 +13,21 @@ public class ServerBuilder implements Builder<Server> {
 	}
 
 	public Server build() {
-		return new Server(capacity);
+		Server server = new Server(capacity);
+		if(expectedLoad > 0){
+			int vmsSize = (int) (expectedLoad/ (double) server.getCapacity() * 100.0d);
+			server.addVm(vm().ofSize(vmsSize).build());
+		}
+		return server;
 	}
 	
 	public static ServerBuilder server() {
 		return new ServerBuilder();
+	}
+
+	public Builder<Server> withCurrentLoadOf(double expectedLoad) {
+		this.expectedLoad = expectedLoad;
+		return this;
 	}
 
 }
