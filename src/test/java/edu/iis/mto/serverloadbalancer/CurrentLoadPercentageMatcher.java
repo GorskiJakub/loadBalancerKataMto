@@ -22,7 +22,15 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 	}
 	@Override
 	protected boolean matchesSafely(Server item) {
-		return Math.abs(expectedLoadPercentage - item.currentLoadPrcentage)< 0.01d;
+		return equealsDouble(expectedLoadPercentage, item.currentLoadPrcentage);
+	}
+
+	private boolean equealsDouble(double d1, double d2) {
+		return Math.abs(d1 - d2)< 0.01d;
+	}
+	
+	public static Matcher<? super Server> hasLoadPercentageOf(double expectedLoadPercentage) {
+		return new CurrentLoadPercentageMatcher(expectedLoadPercentage);
 	}
 
 }
