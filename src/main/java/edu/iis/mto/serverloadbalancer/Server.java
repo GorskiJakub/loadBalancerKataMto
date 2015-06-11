@@ -12,8 +12,11 @@ public class Server {
 	}
 
 	public boolean contains(Vm theVm) {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public int getCapacity() {
+		return capacity;
 	}
 
 }
