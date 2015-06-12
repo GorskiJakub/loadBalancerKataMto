@@ -4,7 +4,13 @@ public class ServerLoadBalancer {
 
 	public void balance(Server[] servers, Vm[] vms) {
 		for(Vm vm: vms) {
-			servers[0].addVm(vm);
+			Server lessLoad = null;
+			for(Server server : servers){
+				if(lessLoad ==null || lessLoad.currentLoadPErcentage > server.currentLoadPErcentage){
+					lessLoad = server;
+				}
+			}
+			lessLoad.addVm(vm);
 			
 		}
 	}
